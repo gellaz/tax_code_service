@@ -18,7 +18,7 @@ app = FastAPI()
 
 @app.get("/")
 def root():
-    return "Hello World"
+    return "Welcome to the Tax Code Service!"
 
 
 @app.get("/api/{tax_code}")
