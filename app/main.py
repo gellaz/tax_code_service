@@ -1,8 +1,8 @@
-from datetime import date
-
 from codicefiscale import codicefiscale
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, Request
+from fastapi.templating import Jinja2Templates
 from pydantic import BaseModel
+from starlette.responses import HTMLResponse
 
 
 class Person(BaseModel):
@@ -15,10 +15,12 @@ class Person(BaseModel):
 
 app = FastAPI()
 
+templates = Jinja2Templates(directory="templates")
 
-@app.get("/")
-def root():
-    return "Welcome to the Tax Code Service!"
+
+@app.get("/", response_class=HTMLResponse)
+def home(request: Request):
+    return templates.TemplateResponse("home.html", {"request": request})
 
 
 @app.get("/api/{tax_code}")
@@ -30,7 +32,7 @@ def get_person_from_tax_code(tax_code: str):
 
     ret_value = {
         "first_name": res_dict['raw']['name'],
-        "las    t_name": res_dict['raw']['surname'],
+        "last_name": res_dict['raw']['surname'],
         "birthdate": res_dict['birthdate'].strftime("%d/%m/%Y"),
         "sex": res_dict['sex'],
         "birthplace": f"{res_dict['birthplace']['name']} ({res_dict['birthplace']['province']})",
@@ -39,7 +41,7 @@ def get_person_from_tax_code(tax_code: str):
     return ret_value
 
 
-@app.post("/api/")
+@app.post("/api/dd")
 def get_tax_code_from_person(person: Person):
     try:
         ret_value = codicefiscale.encode(

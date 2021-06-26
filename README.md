@@ -23,6 +23,11 @@ Once the pipenv environment is installed, enter the app folder and type `uvicorn
 The application will be available on `localhost:5000` and the API documentation on `localhost:5000/docs`.
 
 ## Running application as a Docker container
+
+> Prerequisites
+
+* Docker
+
 Open the terminal in the root folder of this project and run the following commands:
 
 ```

@@ -3,6 +3,8 @@ click==8.0.1
 fastapi==0.65.2
 h11==0.12.0
 httptools==0.2.0
+jinja2==3.0.1
+markupsafe==2.0.1
 pydantic==1.8.2
 python-codicefiscale==0.3.7
 python-dateutil==2.8.1
