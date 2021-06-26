@@ -41,7 +41,7 @@ def get_person_from_tax_code(tax_code: str):
     return ret_value
 
 
-@app.post("/api/dd")
+@app.post("/api/")
 def get_tax_code_from_person(person: Person):
     try:
         ret_value = codicefiscale.encode(
